@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Elaine Yeung | AI &amp; Cloud Engineer</title>
+  <meta name="description" content="Elaine Yeung is an AI and cloud engineer in New York and AWS Certified Solutions Architect – Associate, specializing in agentic AI systems and cloud architecture." />
+  <meta name="author" content="Yatlam (Elaine) Yeung" />
+
+  <!-- Social sharing preview -->
+  <meta property="og:title" content="Elaine Yeung | AI & Cloud Engineer" />
+  <meta property="og:description" content="AI and cloud engineer and AWS Certified Solutions Architect – Associate, specializing in agentic AI systems and cloud architecture." />
+  <meta property="og:url" content="https://elaineyeung.com" />
+  <meta property="og:type" content="website" />
+
+  <link rel="icon" href="favicon.svg" type="image/svg+xml" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+
+  <!-- Apply the saved theme before paint to avoid a flash -->
+  <script>
+    document.documentElement.classList.add("js");
+    try {
+      const saved = localStorage.getItem("theme");
+      if (saved) document.documentElement.dataset.theme = saved;
+    } catch (e) {}
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <div class="bg-grid" aria-hidden="true"></div>
+
+  <header class="site-header">
+    <nav class="nav container" aria-label="Main">
+      <a href="#top" class="logo" aria-label="Elaine Yeung, back to top">
+        <span class="logo-mark">EY</span>
+      </a>
+
+      <button class="nav-toggle" aria-expanded="false" aria-controls="nav-links" aria-label="Open menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="nav-links">
+        <li><a href="#focus">Focus</a></li>
+        <li><a href="#projects">Projects</a></li>
+        <li><a href="#skills">Skills</a></li>
+        <li><a href="#experience">Experience</a></li>
+        <li><a href="#education">Education</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li>
+          <button class="theme-toggle" aria-label="Toggle light and dark mode">
+            <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/></svg>
+            <svg class="icon-moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+          </button>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="main">
+    <!-- Hero -->
+    <section class="hero container" id="top">
+      <div class="hero-text">
+        <p class="status-pill"><span class="pulse" aria-hidden="true"></span> Open to AI, cloud &amp; solutions architect roles</p>
+        <h1>Elaine Yeung</h1>
+        <p class="hero-role">
+          <span class="role-static">I'm <span class="role-article">an</span></span>
+          <span class="role-rotator" aria-live="polite">AI Engineer</span><span class="caret" aria-hidden="true"></span>
+        </p>
+        <p class="hero-tagline">
+          I design and ship cloud systems on <strong>AWS</strong> and build with
+          <strong>agentic AI</strong>, with a background in finance, IT audit, and
+          identity &amp; access controls that keeps them secure, compliant, and tied to the business.
+        </p>
+        <a class="cert-badge" href="https://www.credly.com/badges/b5d3d164-37d5-4520-b59a-fd23c037b4d0" target="_blank" rel="noopener" aria-label="AWS Certified Solutions Architect – Associate, verify on Credly">
+          <span class="cert-icon" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="9" r="6"/><path d="M8.5 13.9L7 22l5-3 5 3-1.5-8.1"/><path d="M9.5 9l1.8 1.8L14.8 7.5"/></svg>
+          </span>
+          <span><strong>AWS Certified</strong> Solutions Architect – Associate</span>
+          <span class="cert-verify" aria-hidden="true">Verify ↗</span>
+        </a>
+        <div class="hero-actions">
+          <a href="#projects" class="btn btn-primary">See what I've built</a>
+        </div>
+        <ul class="social-links" aria-label="Profiles">
+          <li><a href="https://github.com/YatlamElaineYeung" target="_blank" rel="noopener">GitHub</a></li>
+          <li><a href="https://www.linkedin.com/in/yatlamyeung/" target="_blank" rel="noopener">LinkedIn</a></li>
+          <li><button type="button" class="link-button" data-open-contact aria-haspopup="dialog">Contact Me</button></li>
+        </ul>
+      </div>
+
+      <!-- Agentic architecture: an AI agent at the center, orchestrating tools with a human in the loop -->
+      <figure class="agent-diagram">
+        <figcaption class="agent-diagram-head">
+          <span class="kicker">// agentic architecture</span>
+          <span class="live-pill"><span class="pulse" aria-hidden="true"></span> powering this site</span>
+        </figcaption>
+        <svg viewBox="30 16 420 396" role="img" aria-labelledby="dg-title dg-desc">
+          <title id="dg-title">Agentic architecture</title>
+          <desc id="dg-desc">A Claude AI agent at the center runs a plan, act, observe loop. It connects to an engineer who sets goals and approves actions, and to tools: the codebase, a shell, the Wrangler CLI, the Cloudflare API, and the Cloudflare edge network where the site is deployed.</desc>
+          <defs>
+            <linearGradient id="dg-grad" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#8b7bff" />
+              <stop offset="1" stop-color="#22d3ee" />
+            </linearGradient>
+            <radialGradient id="dg-core" cx="0.5" cy="0.5" r="0.5">
+              <stop offset="0" stop-color="#8b7bff" stop-opacity="0.35" />
+              <stop offset="1" stop-color="#8b7bff" stop-opacity="0" />
+            </radialGradient>
+            <path id="dg-loop" d="M 240 215 m -84 0 a 84 84 0 1 1 168 0 a 84 84 0 1 1 -168 0" />
+          </defs>
+
+          <!-- Connections from the agent to each node -->
+          <g class="dg-links">
+            <line class="dg-link dg-link-human" x1="240" y1="215" x2="240" y2="72" />
+            <line class="dg-link" x1="240" y1="215" x2="383" y2="132" />
+            <line class="dg-link" x1="240" y1="215" x2="383" y2="298" />
+            <line class="dg-link dg-link-edge" x1="240" y1="215" x2="240" y2="358" />
+            <line class="dg-link" x1="240" y1="215" x2="97" y2="298" />
+            <line class="dg-link" x1="240" y1="215" x2="97" y2="132" />
+          </g>
+
+          <!-- The agent core and its reasoning loop -->
+          <circle cx="240" cy="215" r="110" fill="url(#dg-core)" />
+          <g class="dg-orbit">
+            <circle cx="240" cy="215" r="84" class="dg-orbit-ring" />
+            <text class="dg-orbit-text"><textPath href="#dg-loop" startOffset="0">PLAN → ACT → OBSERVE → PLAN → ACT → OBSERVE →</textPath></text>
+          </g>
+          <circle cx="240" cy="215" r="60" class="dg-core" />
+          <text x="240" y="211" class="dg-core-title">Claude</text>
+          <text x="240" y="230" class="dg-core-sub">AI agent</text>
+
+          <!-- Nodes -->
+          <g class="dg-node dg-node-human" transform="translate(240 50)">
+            <rect x="-62" y="-24" width="124" height="48" rx="12" />
+            <text y="-3" class="dg-label">Engineer</text>
+            <text y="13" class="dg-sub">goals · approvals</text>
+          </g>
+          <g class="dg-node" transform="translate(383 132)">
+            <rect x="-58" y="-24" width="116" height="48" rx="12" />
+            <text y="-3" class="dg-label">Shell</text>
+            <text y="13" class="dg-sub">run · verify</text>
+          </g>
+          <g class="dg-node" transform="translate(383 298)">
+            <rect x="-58" y="-24" width="116" height="48" rx="12" />
+            <text y="-3" class="dg-label">Wrangler CLI</text>
+            <text y="13" class="dg-sub">build · deploy</text>
+          </g>
+          <g class="dg-node dg-node-edge" transform="translate(240 380)">
+            <rect x="-70" y="-24" width="140" height="48" rx="12" />
+            <text y="-3" class="dg-label">Cloudflare Edge</text>
+            <text y="13" class="dg-sub">Workers · DNS · TLS</text>
+          </g>
+          <g class="dg-node" transform="translate(97 298)">
+            <rect x="-58" y="-24" width="116" height="48" rx="12" />
+            <text y="-3" class="dg-label">Cloudflare API</text>
+            <text y="13" class="dg-sub">OAuth scoped</text>
+          </g>
+          <g class="dg-node" transform="translate(97 132)">
+            <rect x="-58" y="-24" width="116" height="48" rx="12" />
+            <text y="-3" class="dg-label">Codebase</text>
+            <text y="13" class="dg-sub">read · write</text>
+          </g>
+        </svg>
+      </figure>
+    </section>
+
+    <!-- Focus areas -->
+    <section class="section container reveal" id="focus">
+      <!-- This section's content is maintained privately. See it live at https://elaineyeung.com -->
+    </section>
+
+    <!-- Projects -->
+    <section class="section container reveal" id="projects">
+      <p class="kicker">// featured work</p>
+      <h2 class="section-title">Projects</h2>
+
+      <!-- Featured: agentic deployment -->
+      <article class="card project featured">
+        <div class="project-head">
+          <div>
+            <p class="badge">Featured · Agentic AI · Cloud</p>
+            <h3>Agentic AI Build-and-Deploy Pipeline</h3>
+            <p class="meta">This website · 2026</p>
+          </div>
+          <a class="project-link" href="https://github.com/YatlamElaineYeung/elaineyeung.com" target="_blank" rel="noopener" aria-label="Source code for this site on GitHub">
+            View code
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+        <p class="project-summary">
+          I used <strong>Claude</strong> as an autonomous coding agent, connected to my
+          <strong>Cloudflare</strong> account, to design, build, and deploy this site end to end,
+          from DNS, TLS, and edge routing to a private, secure contact form, with me approving
+          every high-impact action.
+        </p>
+
+        <!-- Architecture diagram -->
+        <div class="arch" aria-label="Architecture: Engineer gives goals and approvals to the Claude agent, which uses tools to deploy to Cloudflare's edge, which serves visitors.">
+          <div class="arch-node">
+            <span class="arch-step">01</span>
+            <h4>Engineer</h4>
+            <p>Sets goals, reviews plans, approves publishing</p>
+          </div>
+          <div class="arch-arrow" aria-hidden="true"><span>prompts &amp; approvals</span></div>
+          <div class="arch-node arch-ai">
+            <span class="arch-step">02</span>
+            <h4>Claude Agent</h4>
+            <p>Plans, writes code, runs tools, verifies results</p>
+          </div>
+          <div class="arch-arrow" aria-hidden="true"><span>tool calls</span></div>
+          <div class="arch-node">
+            <span class="arch-step">03</span>
+            <h4>Tooling</h4>
+            <p>Shell · Wrangler CLI · Cloudflare API (OAuth)</p>
+          </div>
+          <div class="arch-arrow" aria-hidden="true"><span>deploy</span></div>
+          <div class="arch-node arch-edge">
+            <span class="arch-step">04</span>
+            <h4>Cloudflare Edge</h4>
+            <p>Worker + static assets · DNS · TLS · redirects · contact form</p>
+          </div>
+        </div>
+
+        <div class="project-cols">
+          <ul class="bullets">
+            <li><strong>Agent with real tools:</strong> the agent read source files, generated HTML/CSS/JS, upgraded the Node.js runtime, and drove the Wrangler CLI and Cloudflare API on its own.</li>
+            <li><strong>Human-in-the-loop guardrails:</strong> publishing to the public internet was blocked by a permission gate until I explicitly approved it.</li>
+            <li><strong>Self-correcting:</strong> when Cloudflare's legacy Pages deploy path failed, the agent diagnosed the error and migrated the project to Workers static assets.</li>
+            <li><strong>Private contact form:</strong> a serverless form (Workers, D1, KV) protected by Cloudflare edge rules, a Turnstile bot check, matching client and server validation, private link screening, and rate limits stored as salted hashes, so no email address or phone number is ever published.</li>
+          </ul>
+          <ul class="bullets">
+            <li><strong>Edge routing:</strong> a Cloudflare Worker sends all <code>http://</code> and <code>www</code> traffic to <code>https://elaineyeung.com</code> with 301 redirects.</li>
+            <li><strong>DNS migration:</strong> moved the domain from Namecheap to Cloudflare nameservers, cleaned up parking records, and attached custom domains with automatic TLS.</li>
+            <li><strong>Verified end to end:</strong> every URL variant was tested with automated checks after each deploy.</li>
+            <li><strong>Reliable delivery:</strong> every message is saved before it's sent, retried automatically, confirmed by signed delivery webhooks, and flagged by a daily alert if it gets stuck. Email is authenticated with SPF, DKIM, and a strict DMARC policy, and the form's logic is covered by unit tests.</li>
+          </ul>
+        </div>
+        <ul class="tags">
+          <li>Claude</li><li>Agentic AI</li><li>Cloudflare Workers</li><li>D1</li><li>KV</li><li>Turnstile</li><li>DNS</li><li>TLS</li><li>OAuth</li><li>Email Security</li><li>JavaScript</li><li>Unit Testing</li>
+        </ul>
+      </article>
+
+      <!-- contact-qr -->
+      <article class="card project">
+        <div class="project-head">
+          <div>
+            <p class="badge">Python · Privacy by Design</p>
+            <h3>Contact QR Code Generator</h3>
+            <p class="meta">Personal tool · 2026</p>
+          </div>
+          <a class="project-link" href="https://github.com/YatlamElaineYeung/contact-qr" target="_blank" rel="noopener" aria-label="Source code for the contact QR code generator on GitHub">
+            View code
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 17L17 7M8 7h9v9"/></svg>
+          </a>
+        </div>
+        <p class="project-summary">
+          A Python tool that turns my contact details into a QR code. One scan with a phone
+          camera saves me as a contact, with no app or internet connection needed, which makes
+          swapping details at networking events fast and typo-free.
+        </p>
+        <ul class="bullets">
+          <li><strong>Standards-based:</strong> builds a vCard 3.0 contact card with spec-compliant escaping, CRLF line endings, and international phone format, so it imports cleanly on iPhone and Android.</li>
+          <li><strong>Privacy by design:</strong> personal details live in a gitignored file and the generated codes are excluded too, so the public repository holds only placeholder data.</li>
+          <li><strong>Data-driven trade-offs:</strong> chose a self-contained QR code over a hosted link so it works offline and keeps details private.</li>
+          <li><strong>Verified:</strong> decoded the generated image to confirm it matches the source byte for byte, then tested it on a real phone.</li>
+        </ul>
+        <ul class="tags">
+          <li>Python</li><li>segno</li><li>vCard</li><li>QR Codes</li><li>Privacy by Design</li>
+        </ul>
+      </article>
+    </section>
+
+    <!-- Skills -->
+    <section class="section container reveal" id="skills">
+      <p class="kicker">// toolkit</p>
+      <h2 class="section-title">Technical Skills</h2>
+      <div class="skills-grid">
+        <article class="card skill-card skill-aws">
+          <h3>AWS</h3>
+          <p class="skill-note">Certified Solutions Architect – Associate</p>
+          <ul class="tags">
+            <li>EC2</li><li>S3</li><li>Lambda</li><li>IAM</li><li>VPC</li><li>RDS</li><li>API Gateway</li><li>CloudFormation</li>
+          </ul>
+        </article>
+        <article class="card skill-card">
+          <h3>AI &amp; Agents</h3>
+          <ul class="tags">
+            <li>Claude</li><li>LLM tool use</li><li>Agentic workflows</li><li>Human-in-the-loop</li><li>Prompt design</li>
+          </ul>
+        </article>
+        <article class="card skill-card">
+          <h3>Cloud &amp; DevOps</h3>
+          <ul class="tags">
+            <li>Cloudflare Workers</li><li>Cloudflare D1</li><li>Cloudflare KV</li><li>DNS</li><li>TLS</li><li>CI/CD</li><li>Serverless</li>
+          </ul>
+        </article>
+        <article class="card skill-card">
+          <h3>Security</h3>
+          <ul class="tags">
+            <li>Secrets management</li><li>PII protection</li><li>Security headers (CSP, HSTS)</li><li>IAM &amp; least privilege</li><li>Rate limiting &amp; bot mitigation</li><li>Email authentication (SPF, DKIM, DMARC)</li><li>Webhook signature verification</li>
+          </ul>
+        </article>
+        <article class="card skill-card">
+          <h3>System Design</h3>
+          <ul class="tags">
+            <li>Microservices</li><li>Monoliths</li><li>Domain-driven design</li><li>Message passing</li><li>Event sourcing</li>
+          </ul>
+        </article>
+        <article class="card skill-card">
+          <h3>Programming</h3>
+          <ul class="tags">
+            <li>Python 3</li><li>JavaScript ES6+</li><li>SQL</li><li>HTML5</li><li>CSS</li>
+          </ul>
+        </article>
+        <article class="card skill-card">
+          <h3>Frameworks &amp; Data</h3>
+          <ul class="tags">
+            <li>Django 4</li><li>FastAPI</li><li>React</li><li>PostgreSQL</li><li>MongoDB</li><li>WebSockets</li>
+          </ul>
+        </article>
+        <article class="card skill-card skill-spoken">
+          <h3>Spoken Languages</h3>
+          <p class="skill-note">Native or bilingual proficiency</p>
+          <ul class="tags">
+            <li>English</li><li>Cantonese</li><li>Mandarin</li><li>Shanghainese</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <!-- Experience -->
+    <section class="section container reveal" id="experience">
+      <!-- This section's content is maintained privately. See it live at https://elaineyeung.com -->
+    </section>
+
+    <!-- Education -->
+    <section class="section container reveal" id="education">
+      <!-- This section's content is maintained privately. See it live at https://elaineyeung.com -->
+    </section>
+
+    <!-- Contact -->
+    <section class="section container contact reveal" id="contact">
+      <div class="contact-card">
+        <p class="kicker">// let's talk</p>
+        <h2 class="section-title">Building something on AWS or with AI?</h2>
+        <p class="contact-text">
+          I'm looking for AI engineer, cloud engineer, and solutions architect roles.
+          I'd love to hear what you're working on.
+        </p>
+        <div class="contact-actions">
+          <a href="https://github.com/YatlamElaineYeung" class="btn btn-primary" target="_blank" rel="noopener">GitHub</a>
+          <a href="https://www.linkedin.com/in/yatlamyeung/" class="btn btn-primary" target="_blank" rel="noopener">LinkedIn</a>
+          <button type="button" class="btn btn-primary" data-open-contact aria-haspopup="dialog">Contact Me</button>
+        </div>
+        <noscript><p class="contact-text">The contact form needs JavaScript. You can also reach me on LinkedIn.</p></noscript>
+      </div>
+    </section>
+  </main>
+
+  <!-- Contact form -->
+  <dialog class="contact-dialog" id="contact-dialog" aria-labelledby="contact-dialog-title">
+    <div class="dialog-panel">
+      <button type="button" class="dialog-close" aria-label="Close the contact form">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+
+      <div class="dialog-view" data-view="form">
+        <h2 class="dialog-title" id="contact-dialog-title">Let's Connect</h2>
+        <p class="dialog-intro">Send me a message and I'll get back to you as soon as I can.</p>
+
+        <form class="contact-form" novalidate>
+          <div class="form-row">
+            <div class="field">
+              <label for="cf-first">First Name <span class="req" aria-hidden="true">*</span></label>
+              <input id="cf-first" name="firstName" type="text" autocomplete="given-name" required aria-describedby="cf-first-error" />
+              <p class="field-error" id="cf-first-error"></p>
+            </div>
+            <div class="field">
+              <label for="cf-last">Last Name <span class="req" aria-hidden="true">*</span></label>
+              <input id="cf-last" name="lastName" type="text" autocomplete="family-name" required aria-describedby="cf-last-error" />
+              <p class="field-error" id="cf-last-error"></p>
+            </div>
+          </div>
+
+          <div class="field">
+            <label for="cf-email">Email Address <span class="req" aria-hidden="true">*</span></label>
+            <input id="cf-email" name="email" type="email" autocomplete="email" required aria-describedby="cf-email-error" />
+            <p class="field-error" id="cf-email-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="cf-company">Company <span class="optional">(optional)</span></label>
+            <input id="cf-company" name="company" type="text" autocomplete="organization" aria-describedby="cf-company-error" />
+            <p class="field-error" id="cf-company-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="cf-link">Relevant Link <span class="optional">(optional)</span></label>
+            <input id="cf-link" name="link" type="text" inputmode="url" autocomplete="url" spellcheck="false" placeholder="https://" aria-describedby="cf-link-hint cf-link-error" />
+            <p class="field-hint" id="cf-link-hint">Job posting, LinkedIn profile, portfolio, etc.</p>
+            <p class="field-error" id="cf-link-error"></p>
+          </div>
+
+          <div class="field">
+            <label for="cf-message">Message <span class="req" aria-hidden="true">*</span></label>
+            <textarea id="cf-message" name="message" rows="6" required aria-describedby="cf-message-count cf-message-error"
+              placeholder="Tell me about a role or opportunity, or what you'd like to connect about. If you'd like to set up a call, include a few days and times that work for you in the upcoming week."></textarea>
+            <p class="word-count" id="cf-message-count" aria-live="polite"></p>
+            <p class="field-error" id="cf-message-error"></p>
+          </div>
+
+          <div class="trap" aria-hidden="true">
+            <label for="cf-hp">Leave this field empty</label>
+            <input id="cf-hp" name="hp_field" type="text" tabindex="-1" autocomplete="off" data-1p-ignore data-lpignore="true" />
+          </div>
+
+          <label class="switch">
+            <input type="checkbox" name="resume" role="switch" />
+            <span class="switch-track" aria-hidden="true"></span>
+            <span class="switch-label">Request My Resume</span>
+          </label>
+
+          <div class="turnstile-slot" data-sitekey="__TURNSTILE_SITE_KEY__"></div>
+
+          <p class="form-status" role="alert"></p>
+          <p class="form-note"><span aria-hidden="true">*</span> Required</p>
+          <button type="submit" class="btn btn-primary form-submit">Send Message</button>
+        </form>
+      </div>
+
+      <div class="dialog-view dialog-done" data-view="done" hidden>
+        <p class="done-title" tabindex="-1">Thank you, <span class="done-name"></span>.</p>
+        <p class="done-text">Your message has been received.</p>
+        <button type="button" class="btn btn-primary" data-close-contact>Close</button>
+      </div>
+
+      <div class="dialog-confirm" hidden role="alertdialog" aria-labelledby="cf-discard-title">
+        <p class="confirm-title" id="cf-discard-title">Discard your message?</p>
+        <div class="confirm-actions">
+          <button type="button" class="btn btn-ghost" data-keep-editing>Keep Editing</button>
+          <button type="button" class="btn btn-primary" data-discard>Discard</button>
+        </div>
+      </div>
+    </div>
+  </dialog>
+
+  <dialog class="contact-dialog blocked-dialog" id="contact-blocked" aria-labelledby="contact-blocked-text">
+    <div class="dialog-panel">
+      <p class="blocked-text" id="contact-blocked-text">Your message couldn't be sent right now. Please try again later.</p>
+      <button type="button" class="btn btn-primary" data-close-blocked>Close</button>
+    </div>
+  </dialog>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <p>© <span id="year"></span> Yatlam (Elaine) Yeung. All rights reserved.</p>
+      <p class="footer-note">Built with Claude Code · Deployed on Cloudflare's edge</p>
+    </div>
+  </footer>
+
+  <script src="script.js" defer></script>
+  <script src="contact-form.js" type="module"></script>
+</body>
+</html>

@@ -1,0 +1,47 @@
+// Template of wrangler.jsonc with IDs replaced by placeholders. The real wrangler.jsonc is kept
+// only on my Mac (gitignored); the IDs are also visible in the Cloudflare dashboard.
+// To rebuild it: copy this file to wrangler.jsonc and fill in the IDs.
+{
+  "name": "elaineyeung",
+  "compatibility_date": "2026-10-19",
+  "main": "src/index.js",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Run src/index.js on every request so the redirects always apply
+    "run_worker_first": true
+  },
+  // Cloudflare creates the DNS records and HTTPS certificates for these
+  "routes": [
+    { "pattern": "elaineyeung.com", "custom_domain": true },
+    { "pattern": "www.elaineyeung.com", "custom_domain": true }
+  ],
+  // The workers.dev address only accepts Resend's delivery reports (see src/index.js)
+  "workers_dev": true,
+  // Private storage for contact form messages until they are delivered
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "elaineyeung-contact-form",
+      "database_id": "<D1 database ID>",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // Private storage for the link screening lists (read by src/link-screening.js).
+  // Keep this the only KV namespace in the account: the review key can edit any of them.
+  "kv_namespaces": [
+    { "binding": "LINK_RULES_KV", "id": "<KV namespace ID>" }
+  ],
+  // Hourly: retry unsent messages, tidy up, and send an alert if anything is stuck
+  "triggers": { "crons": ["17 * * * *"] },
+  // Public settings. Private ones (email addresses, Resend key, Turnstile secret, abuse limits) are
+  // Cloudflare secrets set with `npx wrangler secret put <NAME>`; for local preview they live in .dev.vars,
+  // which also overrides these values. The list of secrets is in docs/HOW-IT-WORKS.md.
+  "vars": {
+    "SITE_ORIGIN": "https://elaineyeung.com",
+    "TIME_ZONE": "America/New_York",
+    "SUBJECT_PREFIX": "[elaineyeung.com]",
+    // Public by design: the bot check's site key appears in every visitor's browser
+    "TURNSTILE_SITE_KEY": "<Turnstile site key>"
+  }
+}

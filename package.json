@@ -1,0 +1,14 @@
+{
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "node --test test/*.test.js",
+    "public-index": "node scripts/public-index.mjs"
+  },
+  "devDependencies": {
+    "wrangler": "4.151.0"
+  },
+  "overrides": {
+    "undici": "7.30.1"
+  }
+}

@@ -1,0 +1,36 @@
+# Wrangler's local cache and logs (machine-specific, can contain account details)
+.wrangler/
+
+# Dependencies, if any are ever added
+node_modules/
+
+# Secrets and local environment settings (never commit these)
+.env
+.env.*
+.dev.vars
+
+# macOS folder metadata
+.DS_Store
+
+# Preview images generated while checking the resume layout
+*.pdf.png
+
+# Build output of the resume (the published copy is public/resume.pdf)
+resume/*.pdf
+
+# The resume is not published on the site (it's sent on request). Keep any stray
+# copy out of Git, and out of public/ so it can't be uploaded at deploy time
+public/resume.pdf
+
+
+# Private rules kept out of Git; uploaded as a Cloudflare secret (e.g. LINK_RULES)
+*.private.json
+
+# Real Wrangler settings with Cloudflare IDs stay on this Mac; GitHub gets wrangler.example.jsonc
+wrangler.jsonc
+
+# Personal history stays off GitHub. The real page (public/index.html) and the resume source
+# are kept on this Mac; GitHub gets public-index/index.html, built by `npm run public-index`
+public/index.html
+resume/
+
