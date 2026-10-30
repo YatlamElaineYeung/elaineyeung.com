@@ -1,6 +1,18 @@
 const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
 // ----------------------------------------------------------
+// Refreshing keeps you where you were on the page, instead of jumping back to
+// the last section clicked: section links (#focus, #skills…) still scroll there,
+// but the #… is then dropped from the address bar. Shared links to a section still work.
+// ----------------------------------------------------------
+function dropSectionFromAddress() {
+  if (location.hash) history.replaceState(null, "", location.pathname + location.search);
+}
+
+window.addEventListener("hashchange", dropSectionFromAddress);
+window.addEventListener("load", () => setTimeout(dropSectionFromAddress, 0));
+
+// ----------------------------------------------------------
 // Footer year
 // ----------------------------------------------------------
 document.getElementById("year").textContent = new Date().getFullYear();
