@@ -3,7 +3,7 @@
 import { FIELD_LIMITS } from "../public/form-rules.js";
 import { checkFields } from "../public/form-check.js";
 import { checkLink, findLinks, linkRejectedInMessage, secureLinksInText, toHttps, trueDomain } from "../public/links.js";
-import { loadRules, screenLink } from "./link-screening.js";
+import { SUGGESTION_KEY, loadRules, screenLink } from "./link-screening.js";
 import { sendEmail, verifyResendSignature } from "./email.js";
 
 export const CONTACT_PATH = "/api/contact";
@@ -324,6 +324,8 @@ export async function runHourly(env) {
     env.DB.prepare("DELETE FROM messages WHERE status = 'failed' AND created_at < ?").bind(now - config.keepFailedMs),
   ]);
 
+  await notifyLinkReview(env, config);
+
   // Stuck = not accepted for a few hours, bounced, or (once delivery reports are set up) accepted but not delivered
   const waitingForDelivery = env.RESEND_WEBHOOK_SECRET ? " OR status = 'sent'" : "";
   const stuck = await env.DB.prepare(
@@ -353,5 +355,35 @@ export async function runHourly(env) {
   if (result.ok) {
     await env.DB.prepare("INSERT INTO meta (key, value) VALUES ('last_alert', ?) ON CONFLICT (key) DO UPDATE SET value = excluded.value")
       .bind(String(now)).run();
+  }
+}
+
+// The quarterly review agent saves suggested link list changes under SUGGESTION_KEY, next to the live list.
+// Email me once per new suggestion. The email never includes the lists; nothing changes on the live list
+// until I review the suggestion locally and approve it.
+async function notifyLinkReview(env, config) {
+  if (!env.ALERT_TO || !env.LINK_RULES_KV) return;
+  const suggestion = await env.LINK_RULES_KV.get(SUGGESTION_KEY).catch(() => null);
+  if (!suggestion) return;
+
+  const fingerprint = await sha256(suggestion);
+  const last = await env.DB.prepare("SELECT value FROM meta WHERE key = 'link_review_notified'").first();
+  if (last && last.value === fingerprint) return;
+
+  const result = await sendEmail(env, {
+    to: env.ALERT_TO,
+    subject: `${config.subjectPrefix} Link list review ready`,
+    text: [
+      "The quarterly link list review has saved suggested changes to your private link lists.",
+      "",
+      "Nothing has changed on your live website: the suggestions wait until you approve them.",
+      "",
+      "What to do: open Claude Code in the elaineyeung.com project and say \"review link list suggestions\".",
+    ].join("\n"),
+    idempotencyKey: "link-review-" + fingerprint.slice(0, 32),
+  });
+  if (result.ok) {
+    await env.DB.prepare("INSERT INTO meta (key, value) VALUES ('link_review_notified', ?) ON CONFLICT (key) DO UPDATE SET value = excluded.value")
+      .bind(fingerprint).run();
   }
 }

@@ -5,6 +5,8 @@
 import { LINK_REJECTED, toHttps, trueDomain } from "../public/links.js";
 
 export const RULES_KEY = "link-rules";
+// Where the quarterly review agent saves suggested changes; never read by the form
+export const SUGGESTION_KEY = "link-rules-suggested";
 
 // Returns the rules, or null if they're missing or unreadable (the form then refuses to run)
 export async function loadRules(env) {
