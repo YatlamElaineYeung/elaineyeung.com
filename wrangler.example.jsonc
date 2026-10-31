@@ -18,6 +18,8 @@
   ],
   // The workers.dev address only accepts Resend's delivery reports (see src/index.js)
   "workers_dev": true,
+  // No separate preview address for each uploaded version
+  "preview_urls": false,
   // Private storage for contact form messages until they are delivered
   "d1_databases": [
     {
