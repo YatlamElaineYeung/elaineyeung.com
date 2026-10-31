@@ -48,7 +48,7 @@ flowchart LR
 6. **Storage, then delivery.** The message is saved in D1 first, then emailed through Resend, with the visitor's address as the reply-to. The visitor sees "received" once it's safely saved.
 7. **Confirmation.** Resend's signed delivery report tells the Worker the email arrived, and the stored copy is deleted.
 8. **Hourly job.** Retries anything unsent, removes old records, and emails me a short alert (no visitor details) if anything has been waiting too long, at most once a day.
-9. **Link list reviews.** A scheduled review periodically suggests updates to the private link screening lists and saves them beside the live lists. The hourly job emails me when a new suggestion is waiting; nothing changes on the live site until I review and approve it.
+9. **Link list reviews.** A scheduled review periodically suggests updates to the private link screening lists and saves them beside the live lists. The hourly job emails me when a new suggestion is waiting; nothing changes on the live site until I review and approve it. The hourly job also watches the private lists and emails me if they change without an approved update, if anything unexpected appears in their storage, or if a suggestion arrives outside the review schedule.
 
 ## 3. File-by-file guide
 

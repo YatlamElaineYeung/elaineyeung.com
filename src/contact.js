@@ -3,7 +3,7 @@
 import { FIELD_LIMITS } from "../public/form-rules.js";
 import { checkFields } from "../public/form-check.js";
 import { checkLink, findLinks, linkRejectedInMessage, secureLinksInText, toHttps, trueDomain } from "../public/links.js";
-import { SUGGESTION_KEY, loadRules, screenLink } from "./link-screening.js";
+import { RULES_KEY, SUGGESTION_KEY, loadRules, screenLink } from "./link-screening.js";
 import { sendEmail, verifyResendSignature } from "./email.js";
 
 export const CONTACT_PATH = "/api/contact";
@@ -325,6 +325,7 @@ export async function runHourly(env) {
   ]);
 
   await notifyLinkReview(env, config);
+  await watchLinkLists(env, config);
 
   // Stuck = not accepted for a few hours, bounced, or (once delivery reports are set up) accepted but not delivered
   const waitingForDelivery = env.RESEND_WEBHOOK_SECRET ? " OR status = 'sent'" : "";
@@ -386,4 +387,68 @@ async function notifyLinkReview(env, config) {
     await env.DB.prepare("INSERT INTO meta (key, value) VALUES ('link_review_notified', ?) ON CONFLICT (key) DO UPDATE SET value = excluded.value")
       .bind(fingerprint).run();
   }
+}
+
+// Watchdog for the private link lists. Emails me once per problem when:
+// - the live list changes (approved changes update the stored fingerprint first, so they don't alert),
+// - the live list goes missing, or storage holds anything besides the live list and the suggestion,
+// - a suggestion appears outside the review days (1st–2nd of Jan, Apr, Jul, Oct, UTC), unless a run was expected.
+// Item names and list contents are never put in the email.
+const REVIEW_MONTHS = [0, 3, 6, 9];
+
+async function watchLinkLists(env, config) {
+  if (!env.ALERT_TO || !env.LINK_RULES_KV) return;
+  const getMeta = async (key) => (await env.DB.prepare("SELECT value FROM meta WHERE key = ?").bind(key).first())?.value ?? null;
+  const setMeta = (key, value) =>
+    env.DB.prepare("INSERT INTO meta (key, value) VALUES (?, ?) ON CONFLICT (key) DO UPDATE SET value = excluded.value").bind(key, value).run();
+  const problems = [];
+
+  const live = await env.LINK_RULES_KV.get(RULES_KEY).catch(() => null);
+  if (!live) {
+    if ((await getMeta("link_watch_missing")) !== "1") problems.push("The live link list is missing (the contact form refuses to run without it).");
+    await setMeta("link_watch_missing", "1");
+  } else {
+    await setMeta("link_watch_missing", "0");
+    const liveHash = await sha256(live);
+    const known = await getMeta("link_rules_hash");
+    if (known && known !== liveHash) problems.push("The live link list changed, and no approved change was recorded.");
+    if (known !== liveHash) await setMeta("link_rules_hash", liveHash);
+  }
+
+  const listed = await Promise.resolve().then(() => env.LINK_RULES_KV.list()).catch(() => null);
+  const names = (listed?.keys || []).map((key) => key.name);
+  const unexpected = names.filter((name) => name !== RULES_KEY && name !== SUGGESTION_KEY).sort();
+  const unexpectedHash = unexpected.length ? await sha256(unexpected.join("\n")) : "";
+  if (unexpected.length && (await getMeta("link_watch_unexpected")) !== unexpectedHash) {
+    problems.push(`The link list storage holds ${unexpected.length} unexpected item(s).`);
+  }
+  await setMeta("link_watch_unexpected", unexpectedHash);
+
+  const suggestion = await env.LINK_RULES_KV.get(SUGGESTION_KEY).catch(() => null);
+  if (suggestion) {
+    const suggestionHash = await sha256(suggestion);
+    if ((await getMeta("link_watch_suggestion")) !== suggestionHash) {
+      const now = new Date();
+      const reviewDay = REVIEW_MONTHS.includes(now.getUTCMonth()) && now.getUTCDate() <= 2;
+      const expected = now.getTime() < Number(await getMeta("link_review_expected_until"));
+      if (!reviewDay && !expected) problems.push("A link list suggestion appeared when no review was due.");
+      await setMeta("link_watch_suggestion", suggestionHash);
+    }
+  }
+
+  if (!problems.length) return;
+  await sendEmail(env, {
+    to: env.ALERT_TO,
+    subject: `${config.subjectPrefix} Possible link list emergency`,
+    text: [
+      "Your website's hourly check found:",
+      "",
+      ...problems.map((problem) => "- " + problem),
+      "",
+      "If you didn't expect this: open Google Chrome, then in Terminal paste",
+      "cd ~/Desktop/elaineyeung.com && claude --chrome",
+      "and type /link-review-emergency",
+    ].join("\n"),
+    idempotencyKey: "link-watch-" + (await sha256(problems.join("|") + Date.now())).slice(0, 32),
+  });
 }
