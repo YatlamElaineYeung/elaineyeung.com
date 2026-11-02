@@ -1,0 +1,28 @@
+# Wrangler's local cache and logs (machine-specific, can contain account details)
+.wrangler/
+
+# Dependencies, if any are ever added
+node_modules/
+
+# Secrets and local environment settings (never commit these)
+.env
+.env.*
+.dev.vars
+
+# macOS folder metadata
+.DS_Store
+
+# Generated previews and personal documents are never committed
+*.pdf
+*.pdf.png
+
+# Private rules, lists and email wording kept out of Git (stored in Cloudflare, never in code)
+*.private.json
+
+# Real Wrangler settings with Cloudflare IDs stay on this Mac; GitHub gets wrangler.example.jsonc
+wrangler.jsonc
+
+# The page itself (public/index.html), the security.txt file and personal documents stay on this Mac.
+# GitHub gets the code only
+public/index.html
+public/.well-known/

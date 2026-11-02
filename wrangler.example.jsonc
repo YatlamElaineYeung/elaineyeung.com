@@ -1,0 +1,53 @@
+// Template of wrangler.jsonc with IDs replaced by placeholders. The real wrangler.jsonc is kept
+// only on my Mac (gitignored); the IDs are also visible in the Cloudflare dashboard.
+// To rebuild it: copy this file to wrangler.jsonc and fill in the IDs.
+{
+  "name": "my-site",
+  "compatibility_date": "2026-10-19",
+  "main": "src/index.js",
+  "assets": {
+    "directory": "./public",
+    "binding": "ASSETS",
+    // Run src/index.js on every request so the redirects always apply
+    "run_worker_first": true
+  },
+  // Cloudflare creates the DNS records and HTTPS certificates for these
+  "routes": [
+    { "pattern": "example.com", "custom_domain": true },
+    { "pattern": "www.example.com", "custom_domain": true }
+  ],
+  // The workers.dev address only accepts Resend's delivery reports (see src/index.js)
+  "workers_dev": true,
+  // No separate preview address for each uploaded version
+  "preview_urls": false,
+  // Private storage for contact form messages until they are delivered
+  "d1_databases": [
+    {
+      "binding": "DB",
+      "database_name": "contact-form",
+      "database_id": "<D1 database ID>",
+      "migrations_dir": "migrations"
+    }
+  ],
+  // Private storage for the link screening lists (read by src/link-screening.js)
+  "kv_namespaces": [
+    { "binding": "LINK_RULES_KV", "id": "<KV namespace ID>" }
+  ],
+  // Hourly: retry unsent messages, tidy up, and send an alert if anything is stuck
+  "triggers": { "crons": ["17 * * * *"] },
+  // Public settings. Private ones (email addresses, keys, limits, alert wording) are Cloudflare secrets
+  // set with `npx wrangler secret put <NAME>`; for local preview they live in .dev.vars, which also
+  // overrides these values.
+  "vars": {
+    "SITE_ORIGIN": "https://example.com",
+    "TIME_ZONE": "<your time zone>",
+    "SUBJECT_PREFIX": "[example.com]",
+    // Browser safety rules as JSON (header name -> value). Site-specific, so kept out of the code
+    "SECURITY_HEADERS": "<JSON of header names and values>",
+    // Wording for the form's optional request switch and the safety note in notification emails
+    "REQUEST_LABEL": "<label>",
+    "REQUEST_NOTE": "<note>",
+    // Public by design: the bot check's site key appears in every visitor's browser
+    "TURNSTILE_SITE_KEY": "<Turnstile site key>"
+  }
+}

@@ -1,0 +1,3 @@
+# Files in public/ that must never be uploaded to the website
+.DS_Store
+.assetsignore
