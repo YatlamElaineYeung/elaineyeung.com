@@ -1,6 +1,6 @@
 # elaineyeung.com
 
-The code behind the personal website of **Yatlam (Elaine) Yeung**, AI & cloud engineer and AWS Certified Solutions Architect – Associate.
+The code behind the personal website of **Elaine Yeung**, AI & cloud engineer and AWS Certified Solutions Architect – Associate.
 
 ## About this project
 
@@ -114,4 +114,4 @@ This repository contains no personal contact details. To get in touch, use the c
 
 ---
 
-© Yatlam (Elaine) Yeung. All rights reserved. This code is shared for viewing only; copying, modifying, or reusing any part of it requires my written permission. See [LICENSE](LICENSE) for details.
+© Elaine Yeung. All rights reserved. This code is shared for viewing only; copying, modifying, or reusing any part of it requires my written permission. See [LICENSE](LICENSE) for details.
