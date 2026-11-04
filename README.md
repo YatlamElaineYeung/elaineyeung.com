@@ -1,6 +1,6 @@
 # elaineyeung.com
 
-The code behind the personal website of **Elaine Yeung**, AI & cloud engineer and AWS Certified Solutions Architect – Associate.
+The code behind the personal website of **Elaine Yeung**, AI & Cloud Engineer and AWS Certified Solutions Architect – Associate.
 
 ## About this project
 
